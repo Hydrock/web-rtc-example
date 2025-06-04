@@ -2,7 +2,11 @@ const localVideo = document.getElementById('localVideo');
 const remoteVideo = document.getElementById('remoteVideo');
 
 const ws = new WebSocket('ws://localhost:3000');
-const peer = new RTCPeerConnection();
+const peer = new RTCPeerConnection({
+    iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' }
+    ]
+});
 
 peer.onnegotiationneeded = async () => {
     console.log('🧩 negotiationneeded');
